@@ -106,17 +106,6 @@ inline uint8_t font_get_height_bytes(FONT_P font) {
   }
 
 
-/******************************************************************************
- * Decides if an additional space to the right of the character is needed
- */
-inline uint8_t font_get_add_space(FONT_P font, char character) {
-  PGM_P type = font_widthtable(font);
-  if ( type != 0 ) //if there is a width table, then it's a proportional font
-    return 1;
-  else
-    return 0;
-  }
-
 
 /******************************************************************************
  * Get the number of the character in the given font
@@ -204,7 +193,7 @@ uint8_t lcd_put_char(FONT_P font, uint8_t style, char character) {
   //load information about character
    uint8_t char_width    = font_get_char_width(font,character); 
    uint8_t font_height   = font_get_height_bytes(font);
-   uint8_t free_space    = font_get_add_space(font,character)*spc;
+   uint8_t free_space    = spc;
    PGM_P   tableposition = font_get_char_position(font,character);
 
   //final size of character

@@ -291,12 +291,6 @@ void lcd_move_xy    (int8_t pages, int16_t columns);
   #define LCD_SWITCH_ON()              lcd_command(LCD_DISPLAY_ENABLE | 1)
   #define LCD_SWITCH_OFF()             lcd_command(LCD_DISPLAY_ENABLE | 0)
   #define LCD_SET_FIRST_LINE(i)        lcd_command(LCD_START_LINE | ((i) & 0x3F))
-  #define LCD_SET_PAGE_ADDR(i)         lcd_command(LCD_PAGE_ADDRESS | ((i) & 0x0F))
-  #define LCD_SET_COLUMN_ADDR(col)     lcd_command(LCD_COL_ADDRESS | ((((col)+SHIFT_ADDR)>>4) & 0x0F)); \
-                                       lcd_command((((col)+SHIFT_ADDR) & 0x0F))
-  #define LCD_GOTO_ADDRESS(page,col)   lcd_command(LCD_PAGE_ADDRESS | ((page) & 0x1F)); \
-                                       lcd_command(LCD_COL_ADDRESS | ((((col)+SHIFT_ADDR)>>4) & 0x0F)); \
-                                       lcd_command((((col)+SHIFT_ADDR) & 0x0F))
   #define LCD_SET_BOTTOM_VIEW()        lcd_command(LCD_BOTTOMVIEW | 1)
   #define LCD_SET_TOP_VIEW()           lcd_command(LCD_BOTTOMVIEW | 0)
   #define LCD_SET_MODE_POSITIVE()      lcd_command(LCD_DISPLAY_INVERT | 0)
@@ -319,6 +313,12 @@ void lcd_move_xy    (int8_t pages, int16_t columns);
 #endif
 
 #if DISPLAY_TYPE == 128 || DISPLAY_TYPE == 132
+  #define LCD_SET_PAGE_ADDR(i)         lcd_command(LCD_PAGE_ADDRESS | ((i) & 0x0F))
+  #define LCD_SET_COLUMN_ADDR(col)     lcd_command(LCD_COL_ADDRESS | ((((col)+SHIFT_ADDR)>>4) & 0x0F)); \
+                                       lcd_command((((col)+SHIFT_ADDR) & 0x0F))
+  #define LCD_GOTO_ADDRESS(page,col)   lcd_command(LCD_PAGE_ADDRESS | ((page) & 0x1F)); \
+                                       lcd_command(LCD_COL_ADDRESS | ((((col)+SHIFT_ADDR)>>4) & 0x0F)); \
+                                       lcd_command((((col)+SHIFT_ADDR) & 0x0F))
   #define LCD_SET_INDICATOR_OFF()      lcd_command(LCD_INDICATOR | 0); \
                                        lcd_command(0x00)
   #define LCD_SET_INDICATOR_STATIC()   lcd_command(LCD_INDICATOR | 1); \
@@ -343,11 +343,17 @@ void lcd_move_xy    (int8_t pages, int16_t columns);
 #endif
 
 #if DISPLAY_TYPE == 102
+  #define LCD_SET_PAGE_ADDR(i)         lcd_command(LCD_PAGE_ADDRESS | ((i) & 0x0F))
+  #define LCD_SET_COLUMN_ADDR(col)     lcd_command((((col)+SHIFT_ADDR) & 0x0F)); \
+                                       lcd_command(LCD_COL_ADDRESS | ((((col)+SHIFT_ADDR)>>4) & 0x0F))
+  #define LCD_GOTO_ADDRESS(page,col)   lcd_command(LCD_PAGE_ADDRESS | ((page) & 0x1F)); \
+                                       lcd_command((((col)+SHIFT_ADDR) & 0x0F)); \
+                                       lcd_command(LCD_COL_ADDRESS | ((((col)+SHIFT_ADDR)>>4) & 0x0F))
   #define LCD_TEMPCOMP_HIGH  0x80
   #define LCD_COLWRAP        0x02
   #define LCD_PAGEWRAP       0x01
   #define LCD_SET_ADV_PROG_CTRL(i)     lcd_command(LCD_ADV_PROG_CTRL); \
-                                       lcd_command(LCD_ADV_PROG_CTRL2 & i)
+                                       lcd_command(LCD_ADV_PROG_CTRL2 | i)
 #endif
 
 

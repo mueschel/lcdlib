@@ -24,6 +24,7 @@ typedef const struct font_info * FONT_P;
 #define FONTS_INCLUDE_font_proportional_16px    font_proportional_16px
 #define FONTS_INCLUDE_font_proportional_8px     font_proportional_8px   
 #define FONTS_INCLUDE_font_fixed_8px            font_fixed_8px
+#define FONTS_INCLUDE_font_fixed_16px           font_fixed_16px
 #define FONTS_INCLUDE_symbols_8px               symbols_8px
 #define FONTS_INCLUDE_symbols_16px              symbols_16px
 #define FONTS_INCLUDE_digits_24px               digits_24px
@@ -40,6 +41,11 @@ typedef const struct font_info * FONT_P;
 #ifdef FONTS_INCLUDE_font_fixed_8px
   extern const struct font_info font_fixed_8px PROGMEM ;
   #define FONT_FIXED_8 &font_fixed_8px
+#endif
+
+#ifdef FONTS_INCLUDE_font_fixed_16px
+  extern const struct font_info font_fixed_16px PROGMEM ;
+  #define FONT_FIXED_16 &font_fixed_16px
 #endif
 
 #ifdef FONTS_INCLUDE_font_proportional_16px
@@ -78,7 +84,6 @@ typedef const struct font_info * FONT_P;
 #define LCD_MOVE(x,y)      lcd_move_xy((x),(y))     //relative cursor movement
 #define LCD_MOVE_TO(x,y)   lcd_moveto_xy((x),(y))   //absolute cursor movement
 #define LCD_WRITE(x)       lcd_data((x))            //write data to display
-#define LCD_CLEAR(x,y)     lcd_clear_area((x),(y))  //clear part of the lcd, sized x times y
 
 //Functions to read the current position as provided by the LCD library
 #define LCD_CURRENT_COL()   lcd_get_position_column()
@@ -100,7 +105,6 @@ PGM_P   font_data              (FONT_P font);
 PGM_P   font_widthtable        (FONT_P font);
 uint8_t font_get_height_bytes  (FONT_P font);
 uint8_t font_get_type          (FONT_P font);
-uint8_t font_get_add_space     (FONT_P font, char character);
 uint8_t font_get_char_width    (FONT_P font, char character);
 int16_t font_get_char_number   (FONT_P font, char character);
 PGM_P   font_get_char_position (FONT_P font, char character);
