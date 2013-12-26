@@ -43,8 +43,18 @@ When using with other GLCDs, make sure the byte orientation of the LCDs
 memory matches the design of the ea-dogm series or link the LCD access
 functions (see header file) to functions converting the data.
  
+
+lcd-color-graphic .c/.h
+-----------------------
+An alternative lcd library controlling a LCD with an ILI9341 driver in 
+16 Bit color mode using 4-wire SPI or any other display with similar
+features. Just use this file instead of dogm-graphic. The function
+lcd_write_font_byte() provides the conversion from the font-generator
+byte format to the format used by the display.
+
  
 Fonts/template_simplefont.c
 ---------------------------
 A template file to be used with Hagen Reddmanns FontEditor to create 
 compatible fonts.
+

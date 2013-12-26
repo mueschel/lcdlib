@@ -65,7 +65,6 @@ inline void lcd_set_font(FONT_P font, uint8_t style){
   global_font_style = style;
 }
 
-
 /******************************************************************************
  * Helper Functions to find, retrieve and display characters
  *****************************************************************************/
@@ -104,6 +103,7 @@ inline uint8_t font_get_height_bytes(FONT_P font) {
   uint8_t t = pgm_read_byte(&tmp->height);
   return (((uint8_t)(t-1)>>3)+1);
   }
+
 
 
 
@@ -206,7 +206,7 @@ uint8_t lcd_put_char(FONT_P font, uint8_t style, char character) {
     if (character == ' ') return 0;
     }
   
-  //write chracter
+  //write character
   do {
     for(i=(row>>hc); i<char_width*font_height; i+=font_height) {
       tmp = pgm_read_byte(tableposition+i);
@@ -332,6 +332,7 @@ uint16_t lcd_putstr_P(PGM_P str) {
   return lcd_put_string_P(global_font_select, global_font_style, str);
   }
 
+  
 /******************************************************************************
  * Outputs a string on the display, using the global font and style at the 
  * given position
@@ -339,7 +340,6 @@ uint16_t lcd_putstr_P(PGM_P str) {
 uint16_t lcd_putstr_xy_P(PGM_P  str, uint8_t page, uint8_t col) {
   return lcd_put_string_xy_P(global_font_select, global_font_style, str, page, col);
   }  
-  
   
 
 #if INCLUDE_INTEGER_OUTPUT == 1
