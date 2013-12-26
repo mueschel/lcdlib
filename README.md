@@ -2,3 +2,49 @@ lcdlib
 ======
 
 Library for EA-DOG LCDs, including font-generator (also usable with color LCD)
+
+Files
+=====
+
+dogm-graphic .c/.h
+------------------
+
+Provides all basic functions to access the display for
+- EA-DOGS102  GLCD (102px x 64px)
+- EA-DOGM128  GLCD (128px x 64px)
+- EA-DOGM132  GLCD (132px x 32px)
+- EA-DOGL128  GLCD (128px x 64px)
+- EA-DOGXL160 GLCD (160px x 104px)
+- can be easily adapted for other displays with similar characteristics
+     
+Since no graphics ram is used, the memory footprint is rather small but
+also does not allow to change single pixels. Data written to the LCD can
+not be read back! Because of that, no drawing functions (lines, circles) 
+are included.
+Thanks to Oliver Schwaneberg for adding several functions to this library!
+ 
+ 
+font .c/.h
+----------
+Font Generator
+designed for GLCD with memory organized in vertical bytes
+
+Own character sets or symbols can easily be added:
+The structure of font data is compatible with Hagen Reddmanns FontEditor
+http://www.mikrocontroller.net/topic/99701#865331
+when using the attached template_simplefont.c and template_simplefont.h
+files, saving in uncompressed format and using font heights of multiples
+of 8.
+ 
+Fixed width fonts are treated as proportional fonts, but do not have a 
+table for the width of each character (D'OH!)
+
+When using with other GLCDs, make sure the byte orientation of the LCDs
+memory matches the design of the ea-dogm series or link the LCD access
+functions (see header file) to functions converting the data.
+ 
+ 
+Fonts/template_simplefont.c
+---------------------------
+A template file to be used with Hagen Reddmanns FontEditor to create 
+compatible fonts.
