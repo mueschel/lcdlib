@@ -2,6 +2,9 @@ lcdlib
 ======
 
 Library for EA-DOG LCDs, including font-generator (also usable with color LCD)
+Further information and discussion (in german) can be found at:
+http://www.mikrocontroller.net/topic/144500
+
 
 Files
 =====
