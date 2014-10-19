@@ -220,7 +220,7 @@ void lcd_clear_area(uint8_t pages, uint8_t columns, uint8_t style) {
     for(i=0; i<columns; i++) {
       lcd_data(inv);
       }
-    lcd_move_xy((lcd_get_position_column()?1:0),-columns);
+    lcd_move_xy(1,-columns);
     }
   lcd_move_xy(-pages,0);
   }
