@@ -227,7 +227,7 @@ uint8_t lcd_put_char(FONT_P font, uint8_t style, char character) {
         if(hc)
           c ^= ul>>1;      
           }
-	    for(uint8_t x = free_space; x>0;x--) {
+	    for(uint8_t x = free_space<<wc; x>0;x--) {
         LCD_WRITE(c);
 		    }		    
       }
