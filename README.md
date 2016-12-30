@@ -5,6 +5,10 @@ Library for EA-DOG LCDs, including font-generator (also usable with color LCD)
 Further information and discussion (in german) can be found at:
 http://www.mikrocontroller.net/topic/144500
 
+The library works with various EA-DOG LCDs (see below) and ILI9341-based colour LCD
+using AVR microcontrollers. A version to be used with Arduino and e.g. a ESP8266 module
+is available in https://github.com/mueschel/lcdlib-arduino .
+
 
 Files
 =====
