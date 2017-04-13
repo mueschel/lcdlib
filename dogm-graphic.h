@@ -276,56 +276,56 @@ void lcd_move_xy    (int8_t pages, int16_t columns);
  * Makros to execute commands 
  *****************************************************************************/
  #if DISPLAY_TYPE == 240
-  #define LCD_SET_TEMP_COMP(i)          LCD_Command(LCD_TEMP_COMP | ((i) & 0x3))
-  #define LCD_SET_PANEL_LOAD(i)         LCD_Command(LCD_PANEL_LOAD | ((i) & 0x3))
-  #define LCD_SET_PUMP_CTRL(i)          LCD_Command(LCD_PUMP_CTRL | ((i) & 0x3))
-  #define LCD_SET_START_LINE(i)         LCD_Command(LCD_START_LINE | ((i)&0xF)); \
-                                        LCD_Command(LCD_START_LINE2 | (((i)>>4)&0x7))
+  #define LCD_SET_TEMP_COMP(i)          lcd_command(LCD_TEMP_COMP | ((i) & 0x3))
+  #define LCD_SET_PANEL_LOAD(i)         lcd_command(LCD_PANEL_LOAD | ((i) & 0x3))
+  #define LCD_SET_PUMP_CTRL(i)          lcd_command(LCD_PUMP_CTRL | ((i) & 0x3))
+  #define LCD_SET_START_LINE(i)         lcd_command(LCD_START_LINE | ((i)&0xF)); \
+                                        lcd_command(LCD_START_LINE2 | (((i)>>4)&0x7))
   #define LCD_SET_PARTIAL_DISPLAY_CTRL(i) \
-                                        LCD_Command(LCD_PARTIAL_CTRL | ((i) & 0x3))
-  #define LCD_SET_RAM_ADDR_CTRL(i)      LCD_Command(LCD_RAM_ADDR_CTRL | ((i) & 0x7))
-  #define LCD_SET_DISPLAY_PATTERN(i)    LCD_Command(LCD_SET_PATTERN | ((i) & 0x7))
-  #define LCD_SET_FIXED_LINES(i)        LCD_Command(LCD_FIXED_LINES | ((i) & 0xF))
-  #define LCD_SET_LINE_RATE(i)          LCD_Command(LCD_LINE_RATE | ((i) & 0x3))
-  #define LCD_SHOW_ALL_PIXELS_ON()      LCD_Command(LCD_ALL_PIXEL | 1)
-  #define LCD_SHOW_ALL_PIXELS_OFF()     LCD_Command(LCD_ALL_PIXEL | 0)
-  #define LCD_INVERT_DISPLAY(i)         LCD_Command(LCD_INVERSE | ((i)&1))
-  #define LCD_SWITCH_ON()               LCD_Command(LCD_DISPLAY_ENABLE | 1)
-  #define LCD_SWITCH_OFF()              LCD_Command(LCD_DISPLAY_ENABLE | 0)
-  #define LCD_SET_MAPPING_CTRL(i)       LCD_Command(LCD_MAPPING_CTRL); \
-                                        LCD_Command((i) & 0xF)
-  #define LCD_SET_PAGE_ADDR(i)          LCD_Command(LCD_PAGE_ADDRESS_LSB | ((i) & 0x0F)); \
-                                        LCD_Command(LCD_PAGE_ADDRESS_MSB | (((i)>>4) & 0x0F))
-  #define LCD_SET_COLUMN_ADDR(i)        LCD_Command(LCD_COL_ADDRESS | (((i)>>4) & 0x0F)); \
-                                        LCD_Command(((i) & 0x0F))
-  #define LCD_GOTO_ADDRESS(page,col)    LCD_Command(LCD_PAGE_ADDRESS_LSB | ((page) & 0x0F)); \
-                                        LCD_Command(LCD_PAGE_ADDRESS_MSB | (((page)>>4) & 0x0F)); \
-                                        LCD_Command(LCD_COL_ADDRESS | (((col)>>4) & 0x0F)); \
-                                        LCD_Command(((col) & 0x0F))
+                                        lcd_command(LCD_PARTIAL_CTRL | ((i) & 0x3))
+  #define LCD_SET_RAM_ADDR_CTRL(i)      lcd_command(LCD_RAM_ADDR_CTRL | ((i) & 0x7))
+  #define LCD_SET_DISPLAY_PATTERN(i)    lcd_command(LCD_SET_PATTERN | ((i) & 0x7))
+  #define LCD_SET_FIXED_LINES(i)        lcd_command(LCD_FIXED_LINES | ((i) & 0xF))
+  #define LCD_SET_LINE_RATE(i)          lcd_command(LCD_LINE_RATE | ((i) & 0x3))
+  #define LCD_SHOW_ALL_PIXELS_ON()      lcd_command(LCD_ALL_PIXEL | 1)
+  #define LCD_SHOW_ALL_PIXELS_OFF()     lcd_command(LCD_ALL_PIXEL | 0)
+  #define LCD_INVERT_DISPLAY(i)         lcd_command(LCD_INVERSE | ((i)&1))
+  #define LCD_SWITCH_ON()               lcd_command(LCD_DISPLAY_ENABLE | 1)
+  #define LCD_SWITCH_OFF()              lcd_command(LCD_DISPLAY_ENABLE | 0)
+  #define LCD_SET_MAPPING_CTRL(i)       lcd_command(LCD_MAPPING_CTRL); \
+                                        lcd_command((i) & 0xF)
+  #define LCD_SET_PAGE_ADDR(i)          lcd_command(LCD_PAGE_ADDRESS_LSB | ((i) & 0x0F)); \
+                                        lcd_command(LCD_PAGE_ADDRESS_MSB | (((i)>>4) & 0x0F))
+  #define LCD_SET_COLUMN_ADDR(i)        lcd_command(LCD_COL_ADDRESS | (((i)>>4) & 0x0F)); \
+                                        lcd_command(((i) & 0x0F))
+  #define LCD_GOTO_ADDRESS(page,col)    lcd_command(LCD_PAGE_ADDRESS_LSB | ((page) & 0x0F)); \
+                                        lcd_command(LCD_PAGE_ADDRESS_MSB | (((page)>>4) & 0x0F)); \
+                                        lcd_command(LCD_COL_ADDRESS | (((col)>>4) & 0x0F)); \
+                                        lcd_command(((col) & 0x0F))
 
-  #define LCD_NOP()                     LCD_Command(LCD_NO_OP)
-  #define LCD_SET_BIAS_RATIO(i)         LCD_Command(LCD_BIAS_RATIO | ((i) & 0x3))
-  #define LCD_SET_COM_END(i)            LCD_Command(LCD_COM_END); \
-                                        LCD_Command(i)
+  #define LCD_NOP()                     lcd_command(LCD_NO_OP)
+  #define LCD_SET_BIAS_RATIO(i)         lcd_command(LCD_BIAS_RATIO | ((i) & 0x3))
+  #define LCD_SET_COM_END(i)            lcd_command(LCD_COM_END); \
+                                        lcd_command(i)
   #define LCD_SET_PARTIAL_DISPLAY(start,end) \
-                                        LCD_Command(LCD_PARTIAL_START); \
-                                        LCD_Command(start); \
-                                        LCD_Command(LCD_PARTIAL_END); \
-                                        LCD_Command(end)
+                                        lcd_command(LCD_PARTIAL_START); \
+                                        lcd_command(start); \
+                                        lcd_command(LCD_PARTIAL_END); \
+                                        lcd_command(end)
   #define LCD_SET_PROGRAM_WINDOW(startpage,startcol,endpage,endcol) \
-                                        LCD_Command(LCD_WINDOW_START_PAGE); \
-                                        LCD_Command(startpage); \
-                                        LCD_Command(LCD_WINDOW_START_COL); \
-                                        LCD_Command(startcol); \
-                                        LCD_Command(LCD_WINDOW_END_PAGE); \
-                                        LCD_Command(endpage); \
-                                        LCD_Command(LCD_WINDOW_END_COL); \
-                                        LCD_Command(endcol)
-  #define LCD_ENABLE_WINDOW_PROGRAM     LCD_Command(LCD_WINDOW_PROGRAM | 1)
-  #define LCD_DISABLE_WINDOW_PROGRAM    LCD_Command(LCD_WINDOW_PROGRAM | 0)
-  #define LCD_SET_POTI(i)               LCD_Command(LCD_POTENTIOMETER); \
-                                        LCD_Command(i)
-  #define LCD_SYSTEM_RESET              LCD_Command(LCD_RESET_CMD)
+                                        lcd_command(LCD_WINDOW_START_PAGE); \
+                                        lcd_command(startpage); \
+                                        lcd_command(LCD_WINDOW_START_COL); \
+                                        lcd_command(startcol); \
+                                        lcd_command(LCD_WINDOW_END_PAGE); \
+                                        lcd_command(endpage); \
+                                        lcd_command(LCD_WINDOW_END_COL); \
+                                        lcd_command(endcol)
+  #define LCD_ENABLE_WINDOW_PROGRAM     lcd_command(LCD_WINDOW_PROGRAM | 1)
+  #define LCD_DISABLE_WINDOW_PROGRAM    lcd_command(LCD_WINDOW_PROGRAM | 0)
+  #define LCD_SET_POTI(i)               lcd_command(LCD_POTENTIOMETER); \
+                                        lcd_command(i)
+  #define LCD_SYSTEM_RESET              lcd_command(LCD_RESET_CMD)
 #endif
 
  #if DISPLAY_TYPE == 160
