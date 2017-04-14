@@ -265,8 +265,8 @@ void lcd_init() {
   LCD_RESET();               //Apply Reset to the Display Controller
   //Load settings
   #if DISPLAY_TYPE == 240
-//LCD_SYSTEM_RESET;                   // software reset
-  //  __delay_ms(5);                      // Gib dem Display ein bisschen Zeit für den Reset
+    //LCD_SYSTEM_RESET;                   // software reset
+    //_delay_ms(5);                      // Gib dem Display ein bisschen Zeit für den Reset
     LCD_SET_COM_END(127);               // set last COM electrode
     LCD_SET_PARTIAL_DISPLAY(0, 127);    // set partial display start and end
     LCD_SET_POTI(0x8F);                 // set Contrast to mid range lvl

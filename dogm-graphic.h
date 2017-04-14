@@ -24,14 +24,14 @@
 #define LCD_USE_BACKLIGHT   0
 
 //A0 Port (CD on DOGS & DOGXL)
-#define PORT_A0  PORTD
-#define DDR_A0   DDRD
-#define PIN_A0   2
+#define PORT_A0  PORTF_OUT
+#define DDR_A0   PORTF_DIR
+#define PIN_A0   1
 
 //Reset Port
-#define PORT_RST PORTD
-#define DDR_RST  DDRD
-#define PIN_RST  5
+#define PORT_RST PORTF_OUT
+#define DDR_RST  PORTF_DIR
+#define PIN_RST  0
 
 //Backlight Port
 #if LCD_USE_BACKLIGHT != 0
@@ -42,9 +42,9 @@
 
 //Chip select
 #if LCD_USE_CHIPSELECT == 1
-  #define PORT_CS  PORTC
-  #define DDR_CS   DDRC
-  #define PIN_CS   PORTC0
+  #define PORT_CS  PORTF_OUT
+  #define DDR_CS   PORTF_DIR
+  #define PIN_CS   4
 #endif
 
 //SPI routines
@@ -53,14 +53,14 @@ extern void init_spi_lcd(void);
 #define LCD_INIT_SPI() init_spi_lcd()
 
 //Define a function that waits until SPI interface is idle
-#define spi_wait_for_idle() while(! (UCSR1A & _BV(TXC1)));UCSR1A |= _BV(TXC1)
+#define spi_wait_for_idle() while(! (SPIF_STATUS & _BV(SPI_IF_bp)))
 
 //Define how to write to SPI data register
-#define spi_write(i) UDR1 = i
+#define spi_write(i) SPIF_DATA = i
 
 //Define this if LCD Output should continue in next line when reaching edge of display
 //Used for all outputs. To enable this feature for text only, use the appropriate flag in font.h
-#define LCD_WRAP_AROUND  1
+#define LCD_WRAP_AROUND  0
 
 //Include graphic functions, i.e. lcd_draw_image_P, lcd_draw_image_xy_P, lcd_clear_area ? 
 #define LCD_INCLUDE_GRAPHIC_FUNCTIONS  1
@@ -468,7 +468,7 @@ void lcd_move_xy    (int8_t pages, int16_t columns);
 #define LCD_RESET_OFF()       PORT_RST |= _BV(PIN_RST)
 #define LCD_RESET_ON()        PORT_RST &= ~_BV(PIN_RST)
 #define LCD_SET_OUTPUT_RST()  DDR_RST |= _BV(PIN_RST)
-#define LCD_RESET()           LCD_RESET_ON();  _delay_ms(1); LCD_RESET_OFF();  _delay_ms(1)
+#define LCD_RESET()           LCD_RESET_ON();  _delay_ms(1); LCD_RESET_OFF();  _delay_ms(10)
 
 //Control pin for Backlight
 #if LCD_USE_BACKLIGHT == 1      //normal
