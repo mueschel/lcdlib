@@ -17,7 +17,7 @@
  * 
  * Author:  Jan Michel (jan at mueschelsoft dot de)
  * License: GNU General Public License, version 3
- * Version: v0.95a November 2012
+ * Version: v0.96 April 2017
  * ****************************************************************************
  * New features in v0.96
  *   - added support for EA-DOGXL240 display
