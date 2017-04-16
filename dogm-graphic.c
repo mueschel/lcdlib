@@ -5,6 +5,7 @@
  *     EA-DOGM132  GLCD (132px x 32px)
  *     EA-DOGL128  GLCD (128px x 64px)
  *     EA-DOGXL160 GLCD (160px x 104px)
+ *     EA-DOGXL240 GLCD (240px x 128px)
  * 
  * Provides all basic functions to access the display
  * Since no graphics ram is used, the memory footprint is rather small but
@@ -16,8 +17,10 @@
  * 
  * Author:  Jan Michel (jan at mueschelsoft dot de)
  * License: GNU General Public License, version 3
- * Version: v0.95a November 2012
+ * Version: v0.96 April 2017
  * ****************************************************************************
+ * New features in v0.96
+ *   - added support for EA-DOGXL240 display
  * New features in v0.95
  *   - added initialization for top-view 
  *   - automatic shifting column addresses (e.g. top-view)
@@ -239,6 +242,16 @@ void lcd_clear_area_xy(uint8_t pages, uint8_t columns, uint8_t style, uint8_t pa
   lcd_clear_area(pages,columns,style);
   }
   
+  /******************************************************************************
+ * This function sets the display contrast
+ * value         - contrast level in percent (0 to 100)
+ */
+#if DISPLAY_TYPE == 240
+  void lcd_set_contrast(uint8_t value) {
+      uint8_t x = (uint8_t)((uint16_t)value*255/100);	// calculate 0-255 value from percent
+      LCD_SET_POTI(x);
+  } 
+#endif
 
 /******************************************************************************
   * Initializes the display in 4x booster for 2.4-3.3V supply voltage
@@ -251,6 +264,19 @@ void lcd_init() {
   LCD_INIT_SPI();            //Initialize SPI Interface  
   LCD_RESET();               //Apply Reset to the Display Controller
   //Load settings
+  #if DISPLAY_TYPE == 240
+    //LCD_SYSTEM_RESET;                   // software reset
+    //_delay_ms(5);                      // Gib dem Display ein bisschen Zeit für den Reset
+    LCD_SET_COM_END(127);               // set last COM electrode
+    LCD_SET_PARTIAL_DISPLAY(0, 127);    // set partial display start and end
+    LCD_SET_POTI(0x8F);                 // set Contrast to mid range lvl
+    LCD_SET_MAPPING_CTRL(2);            // set mapping control to "bottom view"
+    LCD_SET_LINE_RATE(11);              // set line rate to 9.4 kilo lines per second
+    LCD_SET_TEMP_COMP(1);               // set tmep compensation to -0.10%
+    LCD_SWITCH_ON();                    // set display enable (0xA9)
+    LCD_SET_DISPLAY_PATTERN(1);         // set display pattern (0xD1)
+    LCD_SET_RAM_ADDR_CTRL(1);           // set auto-increment
+  #endif
   #if DISPLAY_TYPE == 160
     LCD_SET_COM_END(103);               //set last COM electrode
     #if ORIENTATION_UPSIDEDOWN = 0

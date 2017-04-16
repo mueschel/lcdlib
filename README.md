@@ -22,6 +22,7 @@ Provides all basic functions to access the display for
 - EA-DOGM132  GLCD (132px x 32px)
 - EA-DOGL128  GLCD (128px x 64px)
 - EA-DOGXL160 GLCD (160px x 104px)
+- EA-DOGXL240 GLCD (240px x 128px)
 - can be easily adapted for other displays with similar characteristics
      
 Since no graphics ram is used, the memory footprint is rather small but
