@@ -444,7 +444,7 @@ void lcd_move_xy    (int8_t pages, int16_t columns);
   #define LCD_GOTO_ADDRESS(page,col)   lcd_command(LCD_PAGE_ADDRESS | ((page) & 0x0F)); \
                                        lcd_command((((col)+SHIFT_ADDR) & 0x0F)); \
                                        lcd_command(LCD_COL_ADDRESS | ((((col)+SHIFT_ADDR)>>4) & 0x0F))
-  #define LCD_TEMPCOMP_HIGH  0x90
+  #define LCD_TEMPCOMP_HIGH  0x80
   #define LCD_COLWRAP        0x02
   #define LCD_PAGEWRAP       0x01
   #define LCD_SET_ADV_PROG_CTRL(i)     lcd_command(LCD_ADV_PROG_CTRL); \
