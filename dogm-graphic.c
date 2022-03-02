@@ -279,7 +279,7 @@ void lcd_init() {
   #endif
   #if DISPLAY_TYPE == 160
     LCD_SET_COM_END(103);               //set last COM electrode
-    #if ORIENTATION_UPSIDEDOWN = 0
+    #if ORIENTATION_UPSIDEDOWN == 0
       LCD_SET_BOTTOM_VIEW();            //6 o'clock mode, normal orientation
     #else
       LCD_SET_TOP_VIEW();               //12 o'clock mode, reversed orientation
